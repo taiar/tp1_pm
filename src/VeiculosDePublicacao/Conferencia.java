@@ -1,4 +1,4 @@
-package tp1_pm.VeiculosDePublicacao;
+package VeiculosDePublicacao;
 
 public class Conferencia extends VeiculoDePublicacao{
 

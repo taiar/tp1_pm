@@ -1,7 +1,5 @@
-package tp1_pm;
-
-import tp1_pm.VeiculosDePublicacao.*;
-import tp1_pm.Pesquisadores.*;
+import VeiculosDePublicacao.*;
+import Pesquisadores.*;
 
 public class Tp1_pm {
 
@@ -20,3 +18,4 @@ public class Tp1_pm {
         h.printPopularidade();
         j.printPopularidade();
     }
+}

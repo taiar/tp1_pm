@@ -1,4 +1,4 @@
-package tp1_pm.Pesquisadores;
+package Pesquisadores;
 
 public class Doutor extends Pesquisador{
 

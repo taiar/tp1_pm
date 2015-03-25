@@ -1,4 +1,4 @@
-package tp1_pm.VeiculosDePublicacao;
+package VeiculosDePublicacao;
 
 public abstract class VeiculoDePublicacao {
     private int id;
