@@ -13,3 +13,7 @@ tp1_pm/tp1_pm/nbproject/project.xml
 tp1_pm/tp1_pm/nbproject/private/config.properties
 tp1_pm/tp1_pm/nbproject/private/private.properties
 tp1_pm/tp1_pm/nbproject/private/private.xml
+
+out/
+tp1_pm/tp1_pm/tp1_pm.iml
+.idea/
