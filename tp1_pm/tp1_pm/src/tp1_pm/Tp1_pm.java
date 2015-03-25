@@ -5,15 +5,18 @@ import tp1_pm.Pesquisadores.*;
 
 public class Tp1_pm {
 
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
-        Conferencia c = new Conferencia(8);
-        Revista r = new Revista(5);
-        
-        System.out.println(c);
-        System.out.println(r);
-        
-        Graduado g = new Graduado(1, 2, 3, 1);
-        
-        g.printMeuPeso();
+        Graduado g = new Graduado(1, 2, 3);
+
+        g.printPopularidade();
+
+        Graduado h = new Graduado(2, 5, 1);
+
+        Graduado j = new Graduado(3, 6, 9);
+
+        h.printPopularidade();
+        j.printPopularidade();
     }
-}

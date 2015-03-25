@@ -2,19 +2,17 @@ package tp1_pm.Pesquisadores;
 
 public class Graduado extends Pesquisador{
 
-    public Graduado(int id, int artigosPrimeiroAutor, int artigosSegundoAutor, 
-                    int artigosTerceiroAutor) {
-        super(id, artigosPrimeiroAutor, artigosSegundoAutor, 
-              artigosTerceiroAutor);
+    public Graduado(int id, int horas_ic, int horas_estagio_docencia) {
+        super(id, horas_ic, horas_estagio_docencia);
     }
 
     @Override
-    public int popularidade() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public float popularidade() {
+        return super.popularidade() + super.getHoras_ic() +
+                super.getHoras_estagio_docencia();
     }
-    
-    public void printMeuPeso(){
-        float f = super.peso();
-        System.out.println(f);
+
+    public void printPopularidade(){
+        System.out.println(popularidade());
     }
 }
