@@ -11,8 +11,4 @@ public class Graduado extends Pesquisador{
         return super.popularidade() + super.getHoras_ic() +
                 super.getHoras_estagio_docencia();
     }
-
-    public void printPopularidade(){
-        System.out.println(popularidade());
-    }
 }
