@@ -33,3 +33,5 @@ tp1_pm/build/classes/tp1_pm/VeiculosDePublicacao/Conferencia.class
 tp1_pm/build/classes/tp1_pm/VeiculosDePublicacao/Revista.class
 tp1_pm/build/classes/tp1_pm/VeiculosDePublicacao/VeiculoDePublicacao.class
 tp1_pm/nbproject/build-impl.xml
+
+*.class
