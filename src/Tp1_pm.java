@@ -21,22 +21,22 @@ public class Tp1_pm {
         Doutor d = new Doutor(1, 6, 9, 1, 1, 1);
         System.out.println(d.popularidade());
 
-        // Main directory of the project
-        /*String workingDir = System.getProperty("user.dir");
-        System.out.println("Current working directory : " + workingDir);*/
-
-        File f = new File("src/data/pesquisadores.txt");
+        File[] entradas = new File[6];
+        for (int i = 0; i < 6; i++) {
+            entradas[i] = new File(args[i]);
+        }
 
         Scanner fs = null;
 
         try {
-            fs = new Scanner(f);
+            for (int i = 0; i < 6; i++) {
+                fs = new Scanner(entradas[i]);
+                while(fs.hasNextLine()){
+                    System.out.println(fs.nextLine());
+                }
+            }
         }catch (FileNotFoundException e){
             System.out.println("Arquivo pesquisadores.txt nao encontrado");
-        }
-
-        while(fs.hasNextLine()){
-            System.out.println(fs.nextLine());
         }
     }
 }
