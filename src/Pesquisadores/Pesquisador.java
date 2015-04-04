@@ -1,16 +1,14 @@
 package Pesquisadores;
 
 public abstract class Pesquisador {
-    private int id;
+    protected int id;
 
-    // @todo: criar setters para estes atributos; não são inicializados
-    // na criação!
-    private int artigosPrimeiroAutor;
-    private int artigosSegundoAutor;
-    private int artigoTerceiroAutor;
+    protected int artigosPrimeiroAutor;
+    protected int artigosSegundoAutor;
+    protected int artigoTerceiroAutor;
 
-    private int horas_ic;
-    private int horas_estagio_docencia;
+    protected int horas_ic;
+    protected int horas_estagio_docencia;
 
     public Pesquisador(int id, int horas_ic, int horas_estagio_docencia){
 

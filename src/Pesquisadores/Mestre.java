@@ -2,7 +2,7 @@ package Pesquisadores;
 
 public class Mestre extends Graduado{
 
-    private int alunosDeGraduacao;
+    protected int alunosDeGraduacao;
 
     public static final int PESO_ALUNO_GRADUACAO = 10;
 

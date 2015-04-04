@@ -3,11 +3,11 @@ package VeiculosDePublicacao;
 import java.util.ArrayList;
 
 public abstract class VeiculoDePublicacao {
-    private int id;
+    protected int id;
 
-    private int numeroDeArtigos;
+    protected int numeroDeArtigos;
 
-    private ArrayList<Artigo> Artigos;
+    protected ArrayList<Artigo> Artigos;
 
     public VeiculoDePublicacao(int id){
         this.id = id;
