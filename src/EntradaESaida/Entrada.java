@@ -123,7 +123,9 @@ public class Entrada {
         return true;
     }
 
-    public boolean carregaArtigos(ArrayList<Artigo> artigos, ArrayList<Pesquisador> pesquisadores) {
+    public boolean carregaArtigos(ArrayList<Artigo> artigos, ArrayList<Pesquisador> pesquisadores,
+                                  ArrayList<VeiculoDePublicacao> veiculos) {
+        // Lendo relações entre artigos e pesquisadores
         int indiceEntrada = mapeamentoEntrada.get("grafo_artigos_pesquisadores");
         try {
             this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
@@ -138,6 +140,35 @@ public class Entrada {
                 artigos.add(id, a);
                 // Adiciona informação sobre autoria ao perfil do pesquisador
                 pesquisadores.get(idPesquisador).addArtigo(ordemAutoria);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
+            return false;
+        }
+        // Lendo relações entre artigos e veiculos
+        indiceEntrada = mapeamentoEntrada.get("artigos_veiculos");
+        try {
+            this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
+            Scanner fs = new Scanner(this.entradas[indiceEntrada]);
+            while(fs.hasNextLine()) {
+                String[] parametros = fs.nextLine().split(";");
+                int idArtigo = Integer.parseInt(parametros[0]);
+                int idVeiculo = Integer.parseInt(parametros[1]);
+                artigos.get(idArtigo).setVeiculoDePublicacao(veiculos.get(idVeiculo));
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
+            return false;
+        }
+        // Lendo citações ao artigo
+        indiceEntrada = mapeamentoEntrada.get("grafo_citacoes");
+        try {
+            this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
+            Scanner fs = new Scanner(this.entradas[indiceEntrada]);
+            while(fs.hasNextLine()) {
+                String[] parametros = fs.nextLine().split(";");
+                int idArtigoCitado = Integer.parseInt(parametros[0]);
+                artigos.get(idArtigoCitado).addCitacao();
             }
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");

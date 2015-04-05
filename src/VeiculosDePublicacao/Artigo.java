@@ -12,7 +12,7 @@ public class Artigo {
       this.id = id;
     }
 
-    public void incrementaQuantidadeDeCitacoes(){
+    public void addCitacao(){
         this.quantidadeDeCitacoes++;
     }
 

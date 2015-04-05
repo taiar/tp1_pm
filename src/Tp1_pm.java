@@ -16,7 +16,7 @@ public class Tp1_pm {
 
             entrada.carregaPesquisadores(pesquisadores);
             entrada.carregaVeiculosDePublicacao(veiculos);
-            entrada.carregaArtigos(artigos, pesquisadores);
+            entrada.carregaArtigos(artigos, pesquisadores, veiculos);
 
             for (Pesquisador p : pesquisadores){
                 System.out.println(p);
