@@ -11,23 +11,17 @@ public class Graduado extends Pesquisador{
         this.horas_estagio_docencia = horas_estagio_docencia;
     }
 
-    /**
-     * @return int the horas_ic
-     */
     protected int getHoras_ic() {
         return horas_ic;
     }
 
-    /**
-     * @return int horas_estagio_docencia
-     */
     protected int getHoras_estagio_docencia() {
         return horas_estagio_docencia;
     }
 
     @Override
-    protected float popularidade() {
-        return super.popularidade() + this.getHoras_ic() +
-                this.getHoras_estagio_docencia();
+    public float popularidade() {
+        return super.popularidade() + this.horas_ic() +
+                this.horas_estagio_docencia();
     }
 }

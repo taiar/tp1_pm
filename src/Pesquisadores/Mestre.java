@@ -2,7 +2,7 @@ package Pesquisadores;
 
 public class Mestre extends Graduado{
 
-    protected int alunosDeGraduacao;
+    private int alunosDeGraduacao;
 
     protected static final int PESO_ALUNO_GRADUACAO = 10;
 
@@ -11,8 +11,12 @@ public class Mestre extends Graduado{
         this.alunosDeGraduacao = alunosDeGraduacao;
     }
 
+    protected int getAunosDeGraduacao() {
+        return this.alunosDeGraduacao;
+    }
+
     @Override
-    protected float popularidade() {
+    public float popularidade() {
         return super.popularidade() + (PESO_ALUNO_GRADUACAO * this.alunosDeGraduacao);
     }
 

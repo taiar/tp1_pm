@@ -31,7 +31,6 @@ public abstract class Pesquisador {
                 this.artigoTerceiroAutor;
     }
 
-    // TODO: rever cálculo de peso
     private float peso(){
         float pesoPrimeiro = this.artigosPrimeiroAutor;
         float pesoSegundo = (float) (this.artigosSegundoAutor / 2.0);
@@ -40,7 +39,6 @@ public abstract class Pesquisador {
         return pesoPrimeiro + pesoSegundo + pesoTerceiro;
     }
 
-    // TODO: rever cálculo de popularidade
     protected float popularidade(){
         return this.peso() + this.getNumeroArtigos(); // + citacoes
     }
