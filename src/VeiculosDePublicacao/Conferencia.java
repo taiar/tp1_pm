@@ -6,7 +6,7 @@ public class Conferencia extends VeiculoDePublicacao{
         super(id);
     }
 
-    public fatorDeImpacto() {
+    public float fatorDeImpacto() {
       return super.fatorDeImpacto() + 1;
     }
     
