@@ -42,5 +42,9 @@ public abstract class Pesquisador {
     protected float popularidade(){
         return this.peso() + this.getNumeroArtigos(); // + citacoes
     }
+
+    public String toString(){
+        return "ID do Pesquisador: " + id;
+    }
 }
 

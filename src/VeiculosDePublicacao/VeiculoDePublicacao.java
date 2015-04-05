@@ -27,6 +27,6 @@ public abstract class VeiculoDePublicacao {
     }
     
     public String toString(){
-        return "ID da publicacao: " + id;
+        return "ID da Publicacao: " + id;
     }
 }
