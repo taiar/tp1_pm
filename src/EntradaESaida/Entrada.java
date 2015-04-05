@@ -4,6 +4,7 @@ import Pesquisadores.Doutor;
 import Pesquisadores.Graduado;
 import Pesquisadores.Mestre;
 import Pesquisadores.Pesquisador;
+import VeiculosDePublicacao.Artigo;
 import VeiculosDePublicacao.Conferencia;
 import VeiculosDePublicacao.Revista;
 import VeiculosDePublicacao.VeiculoDePublicacao;
@@ -49,6 +50,11 @@ public class Entrada {
         this.argumentos = args;
     }
 
+    /**
+     * Armazena os Pesquisadores lidos da entrada em um arraylist na posição correspondente ao seu ID.
+     * @param pesquisadores
+     * @return boolean
+     */
     public boolean carregaPesquisadores(ArrayList<Pesquisador> pesquisadores) {
         int indiceEntrada = mapeamentoEntrada.get("pesquisadores");
         try {
@@ -56,24 +62,25 @@ public class Entrada {
             Scanner fs = new Scanner(this.entradas[indiceEntrada]);
             while(fs.hasNextLine()) {
                 String[] parametros = fs.nextLine().split(";");
+                int id = Integer.parseInt(parametros[0]);
                 switch (parametros[1]){
                     case "G":
-                        Graduado g = new Graduado(Integer.parseInt(parametros[0]), Integer.parseInt(parametros[2]),
+                        Graduado g = new Graduado(id, Integer.parseInt(parametros[2]),
                             Integer.parseInt(parametros[3]));
-                        pesquisadores.add(g);
+                        pesquisadores.add(id, g);
                         break;
 
                     case "M":
-                        Mestre m = new Mestre(Integer.parseInt(parametros[0]), Integer.parseInt(parametros[2]),
+                        Mestre m = new Mestre(id, Integer.parseInt(parametros[2]),
                             Integer.parseInt(parametros[3]),Integer.parseInt(parametros[4]));
-                        pesquisadores.add(m);
+                        pesquisadores.add(id, m);
                         break;
 
                     case "D":
-                        Doutor d = new Doutor(Integer.parseInt(parametros[0]), Integer.parseInt(parametros[2]),
+                        Doutor d = new Doutor(id, Integer.parseInt(parametros[2]),
                             Integer.parseInt(parametros[3]), Integer.parseInt(parametros[4]),
                             Integer.parseInt(parametros[5]), Integer.parseInt(parametros[6]));
-                        pesquisadores.add(d);
+                        pesquisadores.add(id, d);
                         break;
                 }
             }
@@ -84,6 +91,11 @@ public class Entrada {
         return true;
     }
 
+    /**
+     * Armazena os Veículos de Publicação lidos da entrada em um arraylist na posição correspondente ao seu ID.
+     * @param veiculos
+     * @return boolean
+     */
     public boolean carregaVeiculosDePublicacao(ArrayList<VeiculoDePublicacao> veiculos) {
         int indiceEntrada = mapeamentoEntrada.get("veiculos");
         try {
@@ -91,17 +103,41 @@ public class Entrada {
             Scanner fs = new Scanner(this.entradas[indiceEntrada]);
             while(fs.hasNextLine()) {
                 String[] parametros = fs.nextLine().split(";");
+                int id = Integer.parseInt(parametros[0]);
                 switch (parametros[1]){
                     case "C":
-                        Conferencia c = new Conferencia(Integer.parseInt(parametros[0]));
-                        veiculos.add(c);
+                        Conferencia c = new Conferencia(id);
+                        veiculos.add(id, c);
                         break;
 
                     case "R":
-                        Revista r = new Revista(Integer.parseInt(parametros[0]));
-                        veiculos.add(r);
+                        Revista r = new Revista(id);
+                        veiculos.add(id, r);
                         break;
                 }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean carregaArtigos(ArrayList<Artigo> artigos, ArrayList<Pesquisador> pesquisadores) {
+        int indiceEntrada = mapeamentoEntrada.get("grafo_artigos_pesquisadores");
+        try {
+            this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
+            Scanner fs = new Scanner(this.entradas[indiceEntrada]);
+            while(fs.hasNextLine()) {
+                String[] parametros = fs.nextLine().split(";");
+                int id = Integer.parseInt(parametros[0]);
+                int idPesquisador = Integer.parseInt(parametros[1]);
+                int ordemAutoria = Integer.parseInt(parametros[2]);
+                // Cria novo artigo
+                Artigo a = new Artigo(id);
+                artigos.add(id, a);
+                // Adiciona informação sobre autoria ao perfil do pesquisador
+                pesquisadores.get(idPesquisador).addArtigo(ordemAutoria);
             }
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
