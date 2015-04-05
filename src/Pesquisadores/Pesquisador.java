@@ -4,9 +4,7 @@ public abstract class Pesquisador {
     
     protected int id;
 
-    protected int artigosPrimeiroAutor;
-    protected int artigosSegundoAutor;
-    protected int artigoTerceiroAutor;
+    private int[] autoria = new int[3];
 
     protected int citacoes;
 
@@ -14,32 +12,19 @@ public abstract class Pesquisador {
         this.id = id;
     }
 
-    protected void setArtigosPrimeiroAutor(int artigos){
-        this.artigosPrimeiroAutor = artigos;
-    }
-
-    protected void setArtigosSegundoAutor(int artigos){
-        this.artigosSegundoAutor = artigos;
-    }
-
-    protected void setArtigosTerceiroAutor(int artigos){
-        this.artigoTerceiroAutor = artigos;
+    public void addArtigo(int ordemAutoria) {
+        this.autoria[ordemAutoria] += 1;
     }
 
     protected int getNumeroArtigos(){
-        return this.artigosPrimeiroAutor + this.artigosSegundoAutor +
-                this.artigoTerceiroAutor;
+        return autoria[0] + autoria[1] + autoria[2];
     }
 
-    private float peso(){
-        float pesoPrimeiro = this.artigosPrimeiroAutor;
-        float pesoSegundo = (float) (this.artigosSegundoAutor / 2.0);
-        float pesoTerceiro = (float) (this.artigoTerceiroAutor / 3.0);
-
-        return pesoPrimeiro + pesoSegundo + pesoTerceiro;
+    private double peso() {
+        return (double) autoria[0] + (autoria[1] / 2.0) + (autoria[2] / 3.0);
     }
 
-    protected float popularidade(){
+    protected double popularidade(){
         return this.peso() + this.getNumeroArtigos(); // + citacoes
     }
 
