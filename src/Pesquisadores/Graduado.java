@@ -2,13 +2,32 @@ package Pesquisadores;
 
 public class Graduado extends Pesquisador{
 
+    private int horas_ic;
+    private int horas_estagio_docencia;
+
     public Graduado(int id, int horas_ic, int horas_estagio_docencia) {
-        super(id, horas_ic, horas_estagio_docencia);
+        super(id);
+        this.horas_ic = horas_ic;
+        this.horas_estagio_docencia = horas_estagio_docencia;
+    }
+
+    /**
+     * @return int the horas_ic
+     */
+    protected int getHoras_ic() {
+        return horas_ic;
+    }
+
+    /**
+     * @return int horas_estagio_docencia
+     */
+    protected int getHoras_estagio_docencia() {
+        return horas_estagio_docencia;
     }
 
     @Override
-    public float popularidade() {
-        return super.popularidade() + super.getHoras_ic() +
-                super.getHoras_estagio_docencia();
+    protected float popularidade() {
+        return super.popularidade() + this.getHoras_ic() +
+                this.getHoras_estagio_docencia();
     }
 }
