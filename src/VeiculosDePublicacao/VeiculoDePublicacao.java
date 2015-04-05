@@ -3,9 +3,18 @@ package VeiculosDePublicacao;
 import java.util.ArrayList;
 
 public abstract class VeiculoDePublicacao {
+    
     protected int id;
 
+    /**
+     * Número de artigos presentes no veículo.
+     */
     protected int numeroDeArtigos;
+
+    /**
+     * Número de vezes que um artigo presente no veículo foi citado.
+     */
+    protected int numeroDeCitacoes;
 
     protected ArrayList<Artigo> Artigos;
 
@@ -14,8 +23,7 @@ public abstract class VeiculoDePublicacao {
     }
 
     public float fatorDeImpacto(){
-        /* @todo o correto eh numero de citacoes / numero de artigos */
-        return this.numeroDeArtigos;
+        return this.numeroDeCitacoes / this.numeroDeArtigos;
     }
     
     public String toString(){
