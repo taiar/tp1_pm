@@ -15,8 +15,12 @@ public class Artigo {
       this.id = id;
     }
 
-    public void addCitacao(){
+    public void addQuantidadeDeCitacoes(){
         this.quantidadeDeCitacoes++;
+    }
+
+    public int getQuantidadeDeCitacoes() {
+        return this.quantidadeDeCitacoes;
     }
 
     public VeiculoDePublicacao getVeiculoDePublicacao() {

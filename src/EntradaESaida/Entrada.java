@@ -144,10 +144,12 @@ public class Entrada {
                 int ordemAutoria = Integer.parseInt(parametros[2]);
                 // Cria novo artigo
                 Artigo a = new Artigo(id);
+                // FIXME: Sobrescreve a informação de autoria sempre que um co-autor é adicionado
                 a.setPesquisador(pesquisadores.get(idPesquisador - 1));
                 armazenamento.put(id, a);
                 // Adiciona informação sobre autoria ao perfil do pesquisador
                 pesquisadores.get(idPesquisador - 1).addArtigo(ordemAutoria);
+                pesquisadores.get(idPesquisador - 1).adicionaArtigo(a);
             }
             artigos.addAll(armazenamento.values());
         }
@@ -178,7 +180,7 @@ public class Entrada {
             while(fs.hasNextLine()) {
                 String[] parametros = fs.nextLine().split(";");
                 int idArtigoCitado = Integer.parseInt(parametros[0]);
-                artigos.get(idArtigoCitado - 1).addCitacao();
+                artigos.get(idArtigoCitado - 1).addQuantidadeDeCitacoes();
             }
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");

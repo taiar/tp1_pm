@@ -1,12 +1,16 @@
 package Pesquisadores;
 
+import VeiculosDePublicacao.Artigo;
+
+import java.util.ArrayList;
+
 public abstract class Pesquisador {
     
     protected int id;
 
     private int[] autoria = new int[10];
-
     protected int citacoes;
+    protected ArrayList<Artigo> artigos = new ArrayList<>();
 
     public Pesquisador(int id){
         this.id = id;
@@ -26,6 +30,10 @@ public abstract class Pesquisador {
 
     protected double popularidade(){
         return this.peso() + this.getNumeroArtigos(); // + citacoes
+    }
+
+    public void adicionaArtigo(Artigo artigo) {
+        this.artigos.add(artigo);
     }
 
     public String toString(){
