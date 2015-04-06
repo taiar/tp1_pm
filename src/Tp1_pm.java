@@ -22,6 +22,7 @@ public class Tp1_pm {
 
             Saida saida = new Saida();
             saida.popularidadePesquisador(pesquisadores);
+            saida.fatorImpactoVeiculo(veiculos);
         }
     }
 }

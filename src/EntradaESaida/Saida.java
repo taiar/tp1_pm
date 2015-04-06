@@ -1,6 +1,7 @@
 package EntradaESaida;
 
 import Pesquisadores.Pesquisador;
+import VeiculosDePublicacao.VeiculoDePublicacao;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -15,8 +16,30 @@ public class Saida {
         Path arquivo = Paths.get("./popularidade_pesquisador.txt");
         try (BufferedWriter writer = Files.newBufferedWriter(arquivo)){
             for(Pesquisador p: pesquisadores){
-                writer.write(String.valueOf(p.getId()) + ";" + String.valueOf(p.getPopularidade()));
+                String linha =
+                        p.getTipo() + ";" +
+                        String.valueOf(p.getId()) + ";" +
+                                String.valueOf(p.getPopularidade()) + ";" +
+                                String.valueOf(p.getPeso())  + ";" +
+                                String.valueOf(p.getNumeroArtigos())  + ";" +
+                                String.valueOf(p.getCitacoes())  + ";(" +
+                                p.autoria[0] + "," + p.autoria[1] + "," + p.autoria[2] + "," + p.autoria[3] + "," + p.autoria[4] + ")";
+                writer.write(linha);
                 writer.newLine();
+                System.out.println(linha);
+            }
+        }
+        catch (IOException e) {}
+    }
+
+    public void fatorImpactoVeiculo(ArrayList<VeiculoDePublicacao> veiculos) {
+        Path arquivo = Paths.get("./fatorImpacto_veiculo.txt");
+        try (BufferedWriter writer = Files.newBufferedWriter(arquivo)){
+            for(VeiculoDePublicacao v: veiculos){
+                String linha = v.getId() + ";" + String.valueOf(v.fatorDeImpacto());
+                writer.write(linha);
+                writer.newLine();
+                System.out.println(linha);
             }
         }
         catch (IOException e) {}

@@ -133,10 +133,10 @@ public class Entrada {
                                   ArrayList<VeiculoDePublicacao> veiculos) {
         // Lendo relações entre artigos e pesquisadores
         int indiceEntrada = mapeamentoEntrada.get("grafo_artigos_pesquisadores");
+        HashMap<Integer, Artigo> armazenamento = new HashMap<>();
         try {
             this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
             Scanner fs = new Scanner(this.entradas[indiceEntrada]);
-            HashMap<Integer, Artigo> armazenamento = new HashMap<>();
             while(fs.hasNextLine()) {
                 String[] parametros = fs.nextLine().split(";");
                 int id = Integer.parseInt(parametros[0]);
@@ -144,19 +144,17 @@ public class Entrada {
                 int ordemAutoria = Integer.parseInt(parametros[2]);
                 // Cria novo artigo
                 Artigo a = new Artigo(id);
-                // FIXME: Sobrescreve a informação de autoria sempre que um co-autor é adicionado
-                a.setPesquisador(pesquisadores.get(idPesquisador - 1));
                 armazenamento.put(id, a);
                 // Adiciona informação sobre autoria ao perfil do pesquisador
                 pesquisadores.get(idPesquisador - 1).addArtigo(ordemAutoria);
-                pesquisadores.get(idPesquisador - 1).adicionaArtigo(a);
+                pesquisadores.get(idPesquisador - 1).adicionaArtigo(armazenamento.get(id));
             }
-            artigos.addAll(armazenamento.values());
         }
         catch (FileNotFoundException e) {
             System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
             return false;
         }
+
         // Lendo relações entre artigos e veiculos
         indiceEntrada = mapeamentoEntrada.get("artigos_veiculos");
         try {
@@ -166,12 +164,16 @@ public class Entrada {
                 String[] parametros = fs.nextLine().split(";");
                 int idArtigo = Integer.parseInt(parametros[0]);
                 int idVeiculo = Integer.parseInt(parametros[1]);
-                artigos.get(idArtigo - 1).setVeiculoDePublicacao(veiculos.get(idVeiculo - 1));
+                armazenamento.get(idArtigo).setVeiculoDePublicacao(veiculos.get(idVeiculo - 1));
+                // Adiciona informação ao veículo
+                veiculos.get(idVeiculo - 1).addArtigo(armazenamento.get(idArtigo));
             }
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e) {
             System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
             return false;
         }
+
         // Lendo citações ao artigo
         indiceEntrada = mapeamentoEntrada.get("grafo_citacoes");
         try {
@@ -180,12 +182,14 @@ public class Entrada {
             while(fs.hasNextLine()) {
                 String[] parametros = fs.nextLine().split(";");
                 int idArtigoCitado = Integer.parseInt(parametros[0]);
-                artigos.get(idArtigoCitado - 1).addQuantidadeDeCitacoes();
+                armazenamento.get(idArtigoCitado).addQuantidadeDeCitacoes();
             }
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e) {
             System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
             return false;
         }
+        artigos.addAll(armazenamento.values());
         return true;
     }
 

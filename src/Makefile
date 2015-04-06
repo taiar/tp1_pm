@@ -9,4 +9,4 @@ run: main
 	java Tp1_pm $(DIR)pesquisadores.txt $(DIR)grafo_pesquisadores.txt $(DIR)grafo_artigos_pesquisadores.txt $(DIR)grafo_citacoes.txt $(DIR)veiculos.txt $(DIR)artigos_veiculos.txt
 
 clean:
-	rm Tp1_pm.class
+	rm *.class ./EntradaESaida/*.class ./Pesquisadores/*.class ./VeiculosDePublicacao/*.class

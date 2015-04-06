@@ -16,6 +16,11 @@ public class Mestre extends Graduado{
     }
 
     @Override
+    public String getTipo() {
+        return "Mestre";
+    }
+
+    @Override
     public double popularidade() {
         return super.popularidade() + (PESO_ALUNO_GRADUACAO * this.alunosDeGraduacao);
     }

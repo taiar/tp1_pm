@@ -20,8 +20,12 @@ public class Graduado extends Pesquisador{
     }
 
     @Override
+    public String getTipo() {
+        return "Grad";
+    }
+
+    @Override
     public double popularidade() {
-        return super.popularidade() + this.horas_ic +
-                this.horas_estagio_docencia;
+        return super.popularidade() + this.horas_ic + this.horas_estagio_docencia;
     }
 }

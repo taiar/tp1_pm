@@ -25,9 +25,14 @@ public class Doutor extends Mestre{
     }
 
     @Override
+    public String getTipo() {
+        return "Doutor";
+    }
+
+    @Override
     public double popularidade() {
-        return super.popularidade() + (PESO_ALUNO_MESTRADO * this.alunosDeMestrado) +
-                (PESO_ALUNO_DOUTORADO * this.alunosDeDoutorado);
+        return super.popularidade() + (PESO_ALUNO_MESTRADO * this.alunosDeMestrado) + (PESO_ALUNO_DOUTORADO *
+                this.alunosDeDoutorado);
     }
 
 }

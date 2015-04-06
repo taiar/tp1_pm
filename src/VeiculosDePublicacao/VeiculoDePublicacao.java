@@ -4,28 +4,45 @@ import java.util.ArrayList;
 
 public abstract class VeiculoDePublicacao {
     
-    protected int id;
+    private int id;
 
-    /**
-     * Número de artigos presentes no veículo.
-     */
-    protected int numeroDeArtigos;
+    private ArrayList<Artigo> artigos = new ArrayList<>();
 
-    /**
-     * Número de vezes que um artigo presente no veículo foi citado.
-     */
-    protected int numeroDeCitacoes;
+    protected int getNumeroCitacoes() {
+        int citacoes = 0;
+        for (Artigo a : this.artigos){
+            citacoes += a.getQuantidadeDeCitacoes();
+        }
+        return citacoes;
+    }
 
-    protected ArrayList<Artigo> Artigos;
+    protected int getNumeroArtigos() {
+        return this.artigos.size();
+    }
 
     public VeiculoDePublicacao(int id){
         this.id = id;
     }
 
-    public float fatorDeImpacto(){
-        return this.numeroDeCitacoes / this.numeroDeArtigos;
+    public void addArtigo(Artigo a) {
+        this.artigos.add(a);
     }
-    
+
+    public float fatorDeImpacto() {
+        float r;
+        try {
+            r = this.getNumeroCitacoes() / this.artigos.size();
+        }
+        catch (ArithmeticException e) {
+            r = 0;
+        }
+        return r;
+    }
+
+    public int getId() {
+        return this.id;
+    }
+
     public String toString(){
         return "ID da Publicacao: " + id;
     }
