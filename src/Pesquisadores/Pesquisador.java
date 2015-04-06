@@ -8,6 +8,7 @@ public abstract class Pesquisador {
     
     protected int id;
 
+    // TODO: tornar isso um ArrayColletcion
     public int[] autoria = new int[10];
     protected ArrayList<Artigo> artigos = new ArrayList<Artigo>();
 
