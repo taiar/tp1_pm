@@ -8,22 +8,20 @@ import java.util.ArrayList;
 public class Tp1_pm {
 
     public static void main(String[] args) {
-        Entrada entrada = new Entrada(args);
-        if(entrada.valida()) {
-            ArrayList<Pesquisador> pesquisadores = new ArrayList<Pesquisador>();
-            ArrayList<VeiculoDePublicacao> veiculos = new ArrayList<VeiculoDePublicacao>();
-            ArrayList<Artigo> artigos = new ArrayList<Artigo>();
 
+        ArrayList<Pesquisador> pesquisadores = new ArrayList<Pesquisador>();
+        ArrayList<VeiculoDePublicacao> veiculos = new ArrayList<VeiculoDePublicacao>();
+        ArrayList<Artigo> artigos = new ArrayList<Artigo>();
+
+        Entrada entrada = new Entrada(args);
+
+        if(entrada.valida()) {
             entrada.carregaPesquisadores(pesquisadores);
             entrada.carregaVeiculosDePublicacao(veiculos);
             entrada.carregaArtigos(artigos, pesquisadores, veiculos);
 
-            for (Pesquisador p : pesquisadores){
-                System.out.println(p);
-            }
-            for (VeiculoDePublicacao p : veiculos){
-                System.out.println(p);
-            }
+            Saida saida = new Saida();
+            saida.popularidadePesquisador(pesquisadores);
         }
     }
 }

@@ -16,6 +16,10 @@ public abstract class Pesquisador {
         this.id = id;
     }
 
+    public int getId() {
+        return this.id;
+    }
+
     public void addArtigo(int ordemAutoria) {
         this.autoria[ordemAutoria - 1] += 1;
     }
@@ -38,6 +42,10 @@ public abstract class Pesquisador {
 
     protected double popularidade(){
         return this.peso() + this.getNumeroArtigos() + this.getNumeroCitacoes();
+    }
+
+    public double getPopularidade() {
+        return this.popularidade();
     }
 
     public void adicionaArtigo(Artigo artigo) {
