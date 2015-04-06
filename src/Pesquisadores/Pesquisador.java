@@ -4,7 +4,7 @@ public abstract class Pesquisador {
     
     protected int id;
 
-    private int[] autoria = new int[3];
+    private int[] autoria = new int[10];
 
     protected int citacoes;
 
@@ -13,7 +13,7 @@ public abstract class Pesquisador {
     }
 
     public void addArtigo(int ordemAutoria) {
-        this.autoria[ordemAutoria] += 1;
+        this.autoria[ordemAutoria - 1] += 1;
     }
 
     protected int getNumeroArtigos(){

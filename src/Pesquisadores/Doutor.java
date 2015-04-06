@@ -25,7 +25,7 @@ public class Doutor extends Mestre{
     }
 
     @Override
-    public float popularidade() {
+    public double popularidade() {
         return super.popularidade() + (PESO_ALUNO_MESTRADO * this.alunosDeMestrado) +
                 (PESO_ALUNO_DOUTORADO * this.alunosDeDoutorado);
     }

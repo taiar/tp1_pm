@@ -20,7 +20,7 @@ public class Graduado extends Pesquisador{
     }
 
     @Override
-    public float popularidade() {
+    public double popularidade() {
         return super.popularidade() + this.horas_ic +
                 this.horas_estagio_docencia;
     }

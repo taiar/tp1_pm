@@ -16,7 +16,7 @@ public class Mestre extends Graduado{
     }
 
     @Override
-    public float popularidade() {
+    public double popularidade() {
         return super.popularidade() + (PESO_ALUNO_GRADUACAO * this.alunosDeGraduacao);
     }
 
