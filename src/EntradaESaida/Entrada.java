@@ -60,6 +60,7 @@ public class Entrada {
         try {
             this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
             Scanner fs = new Scanner(this.entradas[indiceEntrada]);
+            HashMap<Integer, Pesquisador> armazenamento = new HashMap<>();
             while(fs.hasNextLine()) {
                 String[] parametros = fs.nextLine().split(";");
                 int id = Integer.parseInt(parametros[0]);
@@ -67,24 +68,26 @@ public class Entrada {
                     case "G":
                         Graduado g = new Graduado(id, Integer.parseInt(parametros[2]),
                             Integer.parseInt(parametros[3]));
-                        pesquisadores.add(id, g);
+                        armazenamento.put(id, g);
                         break;
 
                     case "M":
                         Mestre m = new Mestre(id, Integer.parseInt(parametros[2]),
                             Integer.parseInt(parametros[3]),Integer.parseInt(parametros[4]));
-                        pesquisadores.add(id, m);
+                        armazenamento.put(id, m);
                         break;
 
                     case "D":
                         Doutor d = new Doutor(id, Integer.parseInt(parametros[2]),
                             Integer.parseInt(parametros[3]), Integer.parseInt(parametros[4]),
                             Integer.parseInt(parametros[5]), Integer.parseInt(parametros[6]));
-                        pesquisadores.add(id, d);
+                        armazenamento.put(id, d);
                         break;
                 }
             }
-        } catch (FileNotFoundException e) {
+            pesquisadores.addAll(armazenamento.values());
+        }
+        catch (FileNotFoundException e) {
             System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
             return false;
         }
@@ -101,22 +104,25 @@ public class Entrada {
         try {
             this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
             Scanner fs = new Scanner(this.entradas[indiceEntrada]);
+            HashMap<Integer, VeiculoDePublicacao> armazenamento = new HashMap<>();
             while(fs.hasNextLine()) {
                 String[] parametros = fs.nextLine().split(";");
                 int id = Integer.parseInt(parametros[0]);
                 switch (parametros[1]){
                     case "C":
                         Conferencia c = new Conferencia(id);
-                        veiculos.add(id, c);
+                        armazenamento.put(id, c);
                         break;
 
                     case "R":
                         Revista r = new Revista(id);
-                        veiculos.add(id, r);
+                        armazenamento.put(id, r);
                         break;
                 }
             }
-        } catch (FileNotFoundException e) {
+            veiculos.addAll(armazenamento.values());
+        }
+        catch (FileNotFoundException e) {
             System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
             return false;
         }
@@ -130,6 +136,7 @@ public class Entrada {
         try {
             this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
             Scanner fs = new Scanner(this.entradas[indiceEntrada]);
+            HashMap<Integer, Artigo> armazenamento = new HashMap<>();
             while(fs.hasNextLine()) {
                 String[] parametros = fs.nextLine().split(";");
                 int id = Integer.parseInt(parametros[0]);
@@ -137,11 +144,13 @@ public class Entrada {
                 int ordemAutoria = Integer.parseInt(parametros[2]);
                 // Cria novo artigo
                 Artigo a = new Artigo(id);
-                artigos.add(id, a);
+                armazenamento.put(id, a);
                 // Adiciona informação sobre autoria ao perfil do pesquisador
-                pesquisadores.get(idPesquisador).addArtigo(ordemAutoria);
+                pesquisadores.get(idPesquisador - 1).addArtigo(ordemAutoria);
             }
-        } catch (FileNotFoundException e) {
+            artigos.addAll(armazenamento.values());
+        }
+        catch (FileNotFoundException e) {
             System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
             return false;
         }
@@ -154,7 +163,7 @@ public class Entrada {
                 String[] parametros = fs.nextLine().split(";");
                 int idArtigo = Integer.parseInt(parametros[0]);
                 int idVeiculo = Integer.parseInt(parametros[1]);
-                artigos.get(idArtigo).setVeiculoDePublicacao(veiculos.get(idVeiculo));
+                artigos.get(idArtigo - 1).setVeiculoDePublicacao(veiculos.get(idVeiculo - 1));
             }
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
@@ -168,7 +177,7 @@ public class Entrada {
             while(fs.hasNextLine()) {
                 String[] parametros = fs.nextLine().split(";");
                 int idArtigoCitado = Integer.parseInt(parametros[0]);
-                artigos.get(idArtigoCitado).addCitacao();
+                artigos.get(idArtigoCitado - 1).addCitacao();
             }
         } catch (FileNotFoundException e) {
             System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
