@@ -60,7 +60,7 @@ public class Entrada {
         try {
             this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
             Scanner fs = new Scanner(this.entradas[indiceEntrada]);
-            HashMap<Integer, Pesquisador> armazenamento = new HashMap<>();
+            HashMap<Integer, Pesquisador> armazenamento = new HashMap<Integer, Pesquisador>();
             while(fs.hasNextLine()) {
                 String[] parametros = fs.nextLine().split(";");
                 int id = Integer.parseInt(parametros[0]);

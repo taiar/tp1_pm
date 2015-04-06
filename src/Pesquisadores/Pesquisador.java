@@ -9,7 +9,7 @@ public abstract class Pesquisador {
     protected int id;
 
     public int[] autoria = new int[10];
-    protected ArrayList<Artigo> artigos = new ArrayList<>();
+    protected ArrayList<Artigo> artigos = new ArrayList<Artigo>();
 
     public Pesquisador(int id){
         this.id = id;

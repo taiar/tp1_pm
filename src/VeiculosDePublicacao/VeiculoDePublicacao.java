@@ -6,7 +6,7 @@ public abstract class VeiculoDePublicacao {
     
     private int id;
 
-    private ArrayList<Artigo> artigos = new ArrayList<>();
+    private ArrayList<Artigo> artigos = new ArrayList<Artigo>();
 
     protected int getNumeroCitacoes() {
         int citacoes = 0;
