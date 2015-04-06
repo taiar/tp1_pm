@@ -1,5 +1,7 @@
 package VeiculosDePublicacao;
 
+import Pesquisadores.Pesquisador;
+
 public class Artigo {
     
     private int id;
@@ -7,6 +9,7 @@ public class Artigo {
     private int quantidadeDeCitacoes;
 
     private VeiculoDePublicacao veiculo;
+    private Pesquisador pesquisador;
 
     public Artigo(int id) {
       this.id = id;
@@ -22,6 +25,14 @@ public class Artigo {
 
     public void setVeiculoDePublicacao(VeiculoDePublicacao v) {
       this.veiculo = v;
+    }
+
+    public Pesquisador getPesquisador() {
+        return pesquisador;
+    }
+
+    public void setPesquisador(Pesquisador pesquisador) {
+        this.pesquisador = pesquisador;
     }
 
     public float qualidade() {

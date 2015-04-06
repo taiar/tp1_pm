@@ -144,6 +144,7 @@ public class Entrada {
                 int ordemAutoria = Integer.parseInt(parametros[2]);
                 // Cria novo artigo
                 Artigo a = new Artigo(id);
+                a.setPesquisador(pesquisadores.get(idPesquisador - 1));
                 armazenamento.put(id, a);
                 // Adiciona informação sobre autoria ao perfil do pesquisador
                 pesquisadores.get(idPesquisador - 1).addArtigo(ordemAutoria);
