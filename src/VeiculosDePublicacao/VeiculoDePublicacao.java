@@ -31,7 +31,7 @@ public abstract class VeiculoDePublicacao {
     public float fatorDeImpacto() {
         float r;
         try {
-            r = this.getNumeroCitacoes() / this.artigos.size();
+            r = (this.getNumeroCitacoes() / (float) this.artigos.size());
         }
         catch (ArithmeticException e) {
             r = 0;
