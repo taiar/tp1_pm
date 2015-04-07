@@ -33,4 +33,8 @@ public class DicionarioHash<TipoChave, TipoValor> {
         return values;
     }
 
+    public int size(){
+        return this.armazenamento.size();
+    }
+
 }
