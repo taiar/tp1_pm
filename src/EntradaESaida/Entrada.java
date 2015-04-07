@@ -8,11 +8,12 @@ import VeiculosDePublicacao.Artigo;
 import VeiculosDePublicacao.Conferencia;
 import VeiculosDePublicacao.Revista;
 import VeiculosDePublicacao.VeiculoDePublicacao;
+import Utilitarios.DicionarioHash;
+import Utilitarios.ExcecaoChaveInexistente;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -32,9 +33,9 @@ public class Entrada {
      *  arg[4] = veiculos.txt
      *  arg[5] = artigos_veiculos.txt
      */
-    private static final HashMap<String, Integer> mapeamentoEntrada;
+    private static final DicionarioHash<String, Integer> mapeamentoEntrada;
     static {
-        mapeamentoEntrada = new HashMap<String,Integer>();
+        mapeamentoEntrada = new DicionarioHash<String, Integer>();
         mapeamentoEntrada.put("pesquisadores", 0);
         mapeamentoEntrada.put("grafo_pesquisadores", 1);
         mapeamentoEntrada.put("grafo_artigos_pesquisadores", 2);
@@ -56,41 +57,52 @@ public class Entrada {
      * @return boolean
      */
     public boolean carregaPesquisadores(ArrayList<Pesquisador> pesquisadores) {
-        int indiceEntrada = mapeamentoEntrada.get("pesquisadores");
-        try {
-            this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
-            Scanner fs = new Scanner(this.entradas[indiceEntrada]);
-            HashMap<Integer, Pesquisador> armazenamento = new HashMap<Integer, Pesquisador>();
-            while(fs.hasNextLine()) {
-                String[] parametros = fs.nextLine().split(";");
-                int id = Integer.parseInt(parametros[0]);
-                switch (parametros[1]){
-                    case "G":
-                        Graduado g = new Graduado(id, Integer.parseInt(parametros[2]),
-                            Integer.parseInt(parametros[3]));
-                        armazenamento.put(id, g);
-                        break;
+        int indiceEntrada = 0;
 
-                    case "M":
-                        Mestre m = new Mestre(id, Integer.parseInt(parametros[2]),
-                            Integer.parseInt(parametros[3]),Integer.parseInt(parametros[4]));
-                        armazenamento.put(id, m);
-                        break;
-
-                    case "D":
-                        Doutor d = new Doutor(id, Integer.parseInt(parametros[2]),
-                            Integer.parseInt(parametros[3]), Integer.parseInt(parametros[4]),
-                            Integer.parseInt(parametros[5]), Integer.parseInt(parametros[6]));
-                        armazenamento.put(id, d);
-                        break;
-                }
-            }
-            pesquisadores.addAll(armazenamento.values());
+        try{
+            indiceEntrada = mapeamentoEntrada.get("pesquisadores");
+        }catch(ExcecaoChaveInexistente e){
+            System.out.println("Chave inexistente: pesquisadores");
+            return false;
         }
-        catch (FileNotFoundException e) {
+
+        this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
+        Scanner fs = null;
+
+        try {
+            fs = new Scanner(this.entradas[indiceEntrada]);
+        } catch (FileNotFoundException e) {
             System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
             return false;
         }
+
+        DicionarioHash<Integer, Pesquisador> armazenamento = new DicionarioHash<Integer, Pesquisador>();
+        while(fs.hasNextLine()) {
+            String[] parametros = fs.nextLine().split(";");
+            int id = Integer.parseInt(parametros[0]);
+            switch (parametros[1]){
+                case "G":
+                    Graduado g = new Graduado(id, Integer.parseInt(parametros[2]),
+                        Integer.parseInt(parametros[3]));
+                    armazenamento.put(id, g);
+                    break;
+
+                case "M":
+                    Mestre m = new Mestre(id, Integer.parseInt(parametros[2]),
+                        Integer.parseInt(parametros[3]),Integer.parseInt(parametros[4]));
+                    armazenamento.put(id, m);
+                    break;
+
+                case "D":
+                    Doutor d = new Doutor(id, Integer.parseInt(parametros[2]),
+                        Integer.parseInt(parametros[3]), Integer.parseInt(parametros[4]),
+                        Integer.parseInt(parametros[5]), Integer.parseInt(parametros[6]));
+                    armazenamento.put(id, d);
+                    break;
+            }
+        }
+        pesquisadores.addAll(armazenamento.values());
+
         return true;
     }
 
@@ -100,85 +112,134 @@ public class Entrada {
      * @return boolean
      */
     public boolean carregaVeiculosDePublicacao(ArrayList<VeiculoDePublicacao> veiculos) {
-        int indiceEntrada = mapeamentoEntrada.get("veiculos");
-        try {
-            this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
-            Scanner fs = new Scanner(this.entradas[indiceEntrada]);
-            HashMap<Integer, VeiculoDePublicacao> armazenamento = new HashMap<>();
-            while(fs.hasNextLine()) {
-                String[] parametros = fs.nextLine().split(";");
-                int id = Integer.parseInt(parametros[0]);
-                switch (parametros[1]){
-                    case "C":
-                        Conferencia c = new Conferencia(id);
-                        armazenamento.put(id, c);
-                        break;
+        int indiceEntrada = 0;
 
-                    case "R":
-                        Revista r = new Revista(id);
-                        armazenamento.put(id, r);
-                        break;
-                }
-            }
-            veiculos.addAll(armazenamento.values());
+        try {
+            mapeamentoEntrada.get("veiculos");
+        }catch(ExcecaoChaveInexistente e){
+            System.out.println("Chave inexistente: veiculos");
+            return false;
         }
-        catch (FileNotFoundException e) {
+
+        this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
+
+        Scanner fs = null;
+
+        try {
+            fs = new Scanner(this.entradas[indiceEntrada]);
+        } catch (FileNotFoundException e) {
             System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
             return false;
         }
+
+        DicionarioHash<Integer, VeiculoDePublicacao> armazenamento = new DicionarioHash<>();
+        while(fs.hasNextLine()) {
+            String[] parametros = fs.nextLine().split(";");
+            int id = Integer.parseInt(parametros[0]);
+            switch (parametros[1]){
+                case "C":
+                    Conferencia c = new Conferencia(id);
+                    armazenamento.put(id, c);
+                    break;
+
+                case "R":
+                    Revista r = new Revista(id);
+                    armazenamento.put(id, r);
+                    break;
+            }
+        }
+        veiculos.addAll(armazenamento.values());
+
         return true;
     }
 
     public boolean carregaArtigos(ArrayList<Artigo> artigos, ArrayList<Pesquisador> pesquisadores,
                                   ArrayList<VeiculoDePublicacao> veiculos) {
         // Lendo relações entre artigos e pesquisadores
-        int indiceEntrada = mapeamentoEntrada.get("grafo_artigos_pesquisadores");
-        HashMap<Integer, Artigo> armazenamento = new HashMap<>();
-        try {
-            this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
-            Scanner fs = new Scanner(this.entradas[indiceEntrada]);
-            while(fs.hasNextLine()) {
-                String[] parametros = fs.nextLine().split(";");
-                int id = Integer.parseInt(parametros[0]);
-                int idPesquisador = Integer.parseInt(parametros[1]);
-                int ordemAutoria = Integer.parseInt(parametros[2]);
-                // Cria novo artigo
-                Artigo a = new Artigo(id);
-                armazenamento.put(id, a);
-                // Adiciona informação sobre autoria ao perfil do pesquisador
-                pesquisadores.get(idPesquisador - 1).addArtigo(ordemAutoria);
-                pesquisadores.get(idPesquisador - 1).adicionaArtigo(armazenamento.get(id));
-            }
+        int indiceEntrada = 0;
+
+        try{
+            indiceEntrada = mapeamentoEntrada.get("grafo_artigos_pesquisadores");
+        }catch(ExcecaoChaveInexistente e){
+            System.out.println("Arquivo grafo_artigos_pesquisadores nao encontrado");
+            return false;
         }
-        catch (FileNotFoundException e) {
+
+        DicionarioHash<Integer, Artigo> armazenamento = new DicionarioHash<>();
+        this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
+
+        Scanner fs = null;
+
+        try {
+            fs = new Scanner(this.entradas[indiceEntrada]);
+        } catch (FileNotFoundException e) {
             System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
             return false;
         }
 
+        while(fs.hasNextLine()) {
+            String[] parametros = fs.nextLine().split(";");
+            int id = Integer.parseInt(parametros[0]);
+            int idPesquisador = Integer.parseInt(parametros[1]);
+            int ordemAutoria = Integer.parseInt(parametros[2]);
+            // Cria novo artigo
+            Artigo a = new Artigo(id);
+            armazenamento.put(id, a);
+            // Adiciona informação sobre autoria ao perfil do pesquisador
+            pesquisadores.get(idPesquisador - 1).addArtigo(ordemAutoria);
+            try{
+                pesquisadores.get(idPesquisador - 1).adicionaArtigo(armazenamento.get(id));
+            }catch(ExcecaoChaveInexistente e){
+                System.out.println("Id pesquisador inexistente: " + id);
+            }
+
+        }
+
+
         // Lendo relações entre artigos e veiculos
-        indiceEntrada = mapeamentoEntrada.get("artigos_veiculos");
+        try{
+            indiceEntrada = mapeamentoEntrada.get("artigos_veiculos");
+        }catch(ExcecaoChaveInexistente e){
+            System.out.println("Arquivo artigos_veiculos nao encontrado");
+            return false;
+        }
+
+        this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
+
         try {
-            this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
-            Scanner fs = new Scanner(this.entradas[indiceEntrada]);
-            while(fs.hasNextLine()) {
-                String[] parametros = fs.nextLine().split(";");
-                int idArtigo = Integer.parseInt(parametros[0]);
-                int idVeiculo = Integer.parseInt(parametros[1]);
+            fs = new Scanner(this.entradas[indiceEntrada]);
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
+            return false;
+        }
+
+        while(fs.hasNextLine()) {
+            String[] parametros = fs.nextLine().split(";");
+            int idArtigo = Integer.parseInt(parametros[0]);
+            int idVeiculo = Integer.parseInt(parametros[1]);
+
+            try{
                 armazenamento.get(idArtigo).setVeiculoDePublicacao(veiculos.get(idVeiculo - 1));
                 // Adiciona informação ao veículo
                 veiculos.get(idVeiculo - 1).addArtigo(armazenamento.get(idArtigo));
+            }catch(ExcecaoChaveInexistente e){
+                System.out.println("Chave inexistente: " + idArtigo);
+                return false;
             }
         }
-        catch (FileNotFoundException e) {
-            System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
+
+
+        // Lendo citações ao artigo
+        try{
+            indiceEntrada = mapeamentoEntrada.get("grafo_citacoes");
+        }catch(ExcecaoChaveInexistente e){
+            System.out.println("Arquivo grafo_citacoes nao encontrado");
             return false;
         }
 
-        // Lendo citações ao artigo
-        indiceEntrada = mapeamentoEntrada.get("grafo_citacoes");
         try {
             this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
-            Scanner fs = new Scanner(this.entradas[indiceEntrada]);
+            fs = new Scanner(this.entradas[indiceEntrada]);
             while(fs.hasNextLine()) {
                 String[] parametros = fs.nextLine().split(";");
                 int idArtigoCitado = Integer.parseInt(parametros[0]);
@@ -189,6 +250,10 @@ public class Entrada {
             System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
             return false;
         }
+        catch(ExcecaoChaveInexistente e){
+
+        }
+
         artigos.addAll(armazenamento.values());
         return true;
     }
