@@ -115,7 +115,7 @@ public class Entrada {
         int indiceEntrada = 0;
 
         try {
-            mapeamentoEntrada.get("veiculos");
+            indiceEntrada = mapeamentoEntrada.get("veiculos");
         }catch(ExcecaoChaveInexistente e){
             System.out.println("Chave inexistente: veiculos");
             return false;
@@ -219,7 +219,6 @@ public class Entrada {
             int idVeiculo = Integer.parseInt(parametros[1]);
 
             try{
-                // Falta carregar os veiculos aqui
                 armazenamento.get(idArtigo).setVeiculoDePublicacao(veiculos.get(idVeiculo - 1));
                 // Adiciona informação ao veículo
                 veiculos.get(idVeiculo - 1).addArtigo(armazenamento.get(idArtigo));
