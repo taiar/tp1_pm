@@ -8,7 +8,7 @@ import VeiculosDePublicacao.Artigo;
 import VeiculosDePublicacao.Conferencia;
 import VeiculosDePublicacao.Revista;
 import VeiculosDePublicacao.VeiculoDePublicacao;
-import Utilitarios.DicionarioHash;
+import Utilitarios.Dicionario;
 import Utilitarios.ExcecaoChaveInexistente;
 
 import java.io.File;
@@ -33,9 +33,9 @@ public class Entrada {
      *  arg[4] = veiculos.txt
      *  arg[5] = artigos_veiculos.txt
      */
-    private static final DicionarioHash<String, Integer> mapeamentoEntrada;
+    private static final Dicionario<String, Integer> mapeamentoEntrada;
     static {
-        mapeamentoEntrada = new DicionarioHash<String, Integer>();
+        mapeamentoEntrada = new Dicionario<String, Integer>();
         mapeamentoEntrada.put("pesquisadores", 0);
         mapeamentoEntrada.put("grafo_pesquisadores", 1);
         mapeamentoEntrada.put("grafo_artigos_pesquisadores", 2);
@@ -76,7 +76,7 @@ public class Entrada {
             return false;
         }
 
-        DicionarioHash<Integer, Pesquisador> armazenamento = new DicionarioHash<Integer, Pesquisador>();
+        Dicionario<Integer, Pesquisador> armazenamento = new Dicionario<Integer, Pesquisador>();
         while(fs.hasNextLine()) {
             String[] parametros = fs.nextLine().split(";");
             int id = Integer.parseInt(parametros[0]);
@@ -132,7 +132,7 @@ public class Entrada {
             return false;
         }
 
-        DicionarioHash<Integer, VeiculoDePublicacao> armazenamento = new DicionarioHash<>();
+        Dicionario<Integer, VeiculoDePublicacao> armazenamento = new Dicionario<>();
         while(fs.hasNextLine()) {
             String[] parametros = fs.nextLine().split(";");
             int id = Integer.parseInt(parametros[0]);
@@ -165,7 +165,7 @@ public class Entrada {
             return false;
         }
 
-        DicionarioHash<Integer, Artigo> armazenamento = new DicionarioHash<>();
+        Dicionario<Integer, Artigo> armazenamento = new Dicionario<>();
         this.entradas[indiceEntrada] = new File(this.argumentos[indiceEntrada]);
 
         Scanner fs = null;

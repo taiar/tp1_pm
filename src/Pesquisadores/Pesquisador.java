@@ -3,14 +3,15 @@ package Pesquisadores;
 import VeiculosDePublicacao.Artigo;
 
 import java.util.ArrayList;
-import Utilitarios.DicionarioHash;
+import Utilitarios.Dicionario;
 import Utilitarios.ExcecaoChaveInexistente;
 
 public abstract class Pesquisador {
     
     protected int id;
 
-    protected DicionarioHash<Integer, Integer> autoria = new DicionarioHash<>();
+    // Autoria: key = ordem de autoria, value = numero de arquivos
+    protected Dicionario<Integer, Integer> autoria = new Dicionario<>();
     protected ArrayList<Artigo> artigos = new ArrayList<Artigo>();
 
     public Pesquisador(int id){
@@ -49,10 +50,20 @@ public abstract class Pesquisador {
     private double peso() {
         double pesoTotal = 0;
 
-        // Acho que nao tem como calcular o peso usando hash
-        /*for(int i = 1; i <= this.autoriaMaxima; i++){
-            pesoTotal += this.autoria.get(i - 1) / (double) i;
-        }*/
+        ArrayList<Integer> chaves = autoria.keys();
+        System.out.println("Autorias " + chaves + " para id " + this.getId());
+
+        int quantidadeAutorias;
+
+        for (Integer ordemAutoria : chaves) {
+            try {
+                quantidadeAutorias = this.autoria.get(ordemAutoria);
+                pesoTotal += quantidadeAutorias / (double) ordemAutoria;
+                System.out.println("Id " + this.getId() + ": " + quantidadeAutorias + " autorias para ordem " + ordemAutoria);
+            } catch (ExcecaoChaveInexistente e) {
+                System.out.println("Chave inexistente no calculo de peso para chave: " + ordemAutoria);
+            }
+        }
 
         return pesoTotal;
         /*return (double) autoria[0] + (autoria[1] / 2.0) + (autoria[2] / 3.0) + (autoria[3] / 4.0) + (autoria[4] / 5.0)

@@ -3,12 +3,12 @@ package Utilitarios;
 /**
  * Created by ghapereira on 4/7/15.
  */
-public class HashItem<TipoChave, TipoValor> {
+public class ItemDicionario<TipoChave, TipoValor> {
 
     private TipoChave chave;
     private TipoValor valor;
 
-    public HashItem(TipoChave chave, TipoValor valor){
+    public ItemDicionario(TipoChave chave, TipoValor valor){
         this.chave = chave;
         this.valor = valor;
     }
