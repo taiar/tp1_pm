@@ -1,28 +1,33 @@
 package Utilitarios;
-
 import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  * Created by ghapereira on 4/7/15.
  */
 public class Dicionario<TipoChave, TipoValor> {
-    private ArrayList<ItemDicionario> armazenamento = new ArrayList<ItemDicionario>();
+    private Vector<ItemDicionario> armazenamento = new Vector<ItemDicionario>();
 
 
     // Refatorar esse metodo!!!!!!!!
     public void put(TipoChave chave, TipoValor valor){
         // Caso chave ja exista, insere valor no lugar da mesma
-        int indiceAdicao;
-        try{
-            indiceAdicao = this.armazenamento.indexOf(this.get(chave));
-            this.armazenamento.add(indiceAdicao, new ItemDicionario<TipoChave, TipoValor>(chave, valor));
-        }catch (ExcecaoChaveInexistente e){
-            //Em caso de chave inexistente, adiciona novo par
-            this.armazenamento.add(new ItemDicionario<TipoChave, TipoValor>(chave, valor));
-        }catch (IndexOutOfBoundsException i){
-            //Em caso de chave inexistente, adiciona novo par
-            this.armazenamento.add(new ItemDicionario<TipoChave, TipoValor>(chave, valor));
+        int indiceAdicao = -1;
+
+        for(ItemDicionario h : this.armazenamento){
+            if(h.getChave().equals(chave)){
+                indiceAdicao = this.armazenamento.indexOf(h);
+            }
         }
+
+        if(indiceAdicao == -1){ // Nao encontrou chave, insira um novo
+            this.armazenamento.add(new ItemDicionario<TipoChave, TipoValor>(chave, valor));
+        }else{
+            // Encontrou chave, insira na posicao
+            this.armazenamento.remove(indiceAdicao);
+            this.armazenamento.add(indiceAdicao, new ItemDicionario<TipoChave, TipoValor>(chave, valor));
+        }
+
     }
 
     public TipoValor get(TipoChave chave) throws ExcecaoChaveInexistente{

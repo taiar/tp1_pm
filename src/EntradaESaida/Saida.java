@@ -25,7 +25,7 @@ public class Saida {
                                 String.valueOf(p.getNumeroArtigos())  + ";" +
                                 String.valueOf(p.getCitacoes())  + ";(" +
                                 p.getAutorias() + ")";
-                                //p.autoria[0] + "," + p.autoria[1] + "," + p.autoria[2] + "," + p.autoria[3] + "," + p.autoria[4] + ")";
+
                 writer.write(linha);
                 writer.newLine();
                 System.out.println(linha);

@@ -101,14 +101,16 @@ public abstract class Pesquisador {
 
     public String getAutorias() {
         String autorias = "";
-        //p.autoria[0] + "," + p.autoria[1] + "," + p.autoria[2] + "," + p.autoria[3] + "," + p.autoria[4] + ")";
-        // Tambem preciso ver como obter autorias usando o hash
-        /*for(int i = 0; i < this.autoriaMaxima; i++){
-            autorias += String.valueOf(this.autoria.get(i));
-            if(i < this.autoriaMaxima - 1){
-                autorias += ",";
-            }
-        }*/
+
+        ArrayList<Integer> chaves = this.autoria.keys();
+        ArrayList<Integer> valores = this.autoria.values();
+
+        int quant = chaves.size();
+
+        for(int i = 0; i < quant; i++){
+            autorias += chaves.get(i) + ": " + valores.get(i);
+            if(i != (quant - 1)) autorias += ", ";
+        }
 
         return autorias;
     }
