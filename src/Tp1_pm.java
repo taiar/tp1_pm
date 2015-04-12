@@ -5,6 +5,13 @@ import VeiculosDePublicacao.VeiculoDePublicacao;
 
 import java.util.ArrayList;
 
+/**
+ * Ponto de entrada do trabalho pratico 1 da disciplina de
+ * Programacao Modular, 1o semestre de 2015 da UFMG.
+ * Este trabalho representa uma estrutura de classes
+ * que permite armazenar e manipular os dados de uma
+ * rede social (ficticia) de pesquisadores
+ */
 public class Tp1_pm {
 
     public static void main(String[] args) {
@@ -15,7 +22,7 @@ public class Tp1_pm {
 
         Entrada entrada = new Entrada(args);
 
-        if(entrada.valida()) {
+        if(entrada.valida()) { // Processa apenas casos de entrada valida
             entrada.carregaPesquisadores(pesquisadores);
             entrada.carregaVeiculosDePublicacao(veiculos);
             entrada.carregaArtigos(artigos, pesquisadores, veiculos);

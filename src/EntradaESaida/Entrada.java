@@ -54,7 +54,7 @@ public class Entrada {
     /**
      * Armazena os Pesquisadores lidos da entrada em um arraylist na posição correspondente ao seu ID.
      * @param pesquisadores
-     * @return boolean
+     * @return @return true caso o carregamento tenha ocorrido corretamente, falso do contrario
      */
     public boolean carregaPesquisadores(ArrayList<Pesquisador> pesquisadores) {
         int indiceEntrada = 0;
@@ -81,18 +81,19 @@ public class Entrada {
             String[] parametros = fs.nextLine().split(";");
             int id = Integer.parseInt(parametros[0]);
             switch (parametros[1]){
+                // Tratamento de graduados
                 case "G":
                     Graduado g = new Graduado(id, Integer.parseInt(parametros[2]),
                         Integer.parseInt(parametros[3]));
                     armazenamento.put(id, g);
                     break;
-
+                // Tratamento de mestres
                 case "M":
                     Mestre m = new Mestre(id, Integer.parseInt(parametros[2]),
                         Integer.parseInt(parametros[3]),Integer.parseInt(parametros[4]));
                     armazenamento.put(id, m);
                     break;
-
+                // Tratamento de doutores
                 case "D":
                     Doutor d = new Doutor(id, Integer.parseInt(parametros[2]),
                         Integer.parseInt(parametros[3]), Integer.parseInt(parametros[4]),
@@ -137,11 +138,12 @@ public class Entrada {
             String[] parametros = fs.nextLine().split(";");
             int id = Integer.parseInt(parametros[0]);
             switch (parametros[1]){
+                // Tratamento de conferencias
                 case "C":
                     Conferencia c = new Conferencia(id);
                     armazenamento.put(id, c);
                     break;
-
+                // Tratamento de revistas
                 case "R":
                     Revista r = new Revista(id);
                     armazenamento.put(id, r);
@@ -153,6 +155,14 @@ public class Entrada {
         return true;
     }
 
+    /**
+     * Armazena os artigos numa estrutura, bem como os associa aos veiculos e pesquisadores
+     * relacionados e processa as citacoes
+     * @param artigos
+     * @param pesquisadores
+     * @param veiculos
+     * @return true caso o carregamento tenha ocorrido corretamente, falso do contrario
+     */
     public boolean carregaArtigos(ArrayList<Artigo> artigos, ArrayList<Pesquisador> pesquisadores,
                                   ArrayList<VeiculoDePublicacao> veiculos) {
         // Lendo relações entre artigos e pesquisadores
@@ -250,14 +260,16 @@ public class Entrada {
             System.out.println("Arquivo " + this.argumentos[indiceEntrada] + " não encontrado.");
             return false;
         }
-        catch(ExcecaoChaveInexistente e){
-
-        }
+        catch(ExcecaoChaveInexistente e){}
 
         artigos.addAll(armazenamento.values());
         return true;
     }
 
+    /**
+     * Valida a quantidade de argumentos passados para o programa
+     * @return true caso o carregamento tenha ocorrido corretamente, falso do contrario
+     */
     public boolean valida() {
         if(NUMERO_DE_ARQUIVOS != this.argumentos.length) {
             this.mostra_ajuda(true);
@@ -266,11 +278,18 @@ public class Entrada {
         return true;
     }
 
+    /**
+     * Apresenta uma mensagem para o usuario com a informacao do problema encontrado
+     */
     private void mostra_ajuda() {
         System.out.println("Foram passados " + this.argumentos.length + " arquivos de " +
             this.NUMERO_DE_ARQUIVOS + " necessarios. O programa sera encerrado.");
     }
 
+    /**
+     * Apresenta uma mensagem para o usuario e encerra o programa de acordo com um sinal
+     * @param terminate Encerra o programa caso seja true
+     */
     private void mostra_ajuda(boolean terminate) {
         this.mostra_ajuda();
         if(terminate)

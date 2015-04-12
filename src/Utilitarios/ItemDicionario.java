@@ -1,7 +1,7 @@
 package Utilitarios;
 
 /**
- * Created by ghapereira on 4/7/15.
+ * Classe que representa um item no dicionario, valor indexavel por chave
  */
 public class ItemDicionario<TipoChave, TipoValor> {
 
@@ -13,9 +13,16 @@ public class ItemDicionario<TipoChave, TipoValor> {
         this.valor = valor;
     }
 
+    /**
+     * @return chave do item
+     */
     public TipoChave getChave(){
         return this.chave;
     }
+
+    /**
+     * @return valor respectivo do item
+     */
     public TipoValor getValor(){
         return this.valor;
     }

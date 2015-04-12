@@ -1,7 +1,8 @@
 package Utilitarios;
 
 /**
- * Created by ghapereira on 4/7/15.
+ * Excecao que e lancada quando ocorre a tentativa de acesso a uma chave
+ * inexistente no Dicionario
  */
 public class ExcecaoChaveInexistente extends Exception {
 

@@ -1,5 +1,8 @@
 package Pesquisadores;
 
+/**
+ * Classe que representa um aluno de mestrado, que tambem e um Pesquisador e Graduado
+ */
 public class Mestre extends Graduado{
 
     private int alunosDeGraduacao;
@@ -11,6 +14,9 @@ public class Mestre extends Graduado{
         this.alunosDeGraduacao = alunosDeGraduacao;
     }
 
+    /**
+     * @return numero de alunos de graduacao orientados pelo mestre
+     */
     protected int getAunosDeGraduacao() {
         return this.alunosDeGraduacao;
     }

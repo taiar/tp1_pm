@@ -1,5 +1,9 @@
 package Pesquisadores;
 
+/**
+ * Classe mais especializada em sua hierarquia, o Doutor pode ter como
+ * orientandos membros de todos os niveis da hierarquia
+ */
 public class Doutor extends Mestre{
 
     private int alunosDeMestrado;
@@ -16,10 +20,16 @@ public class Doutor extends Mestre{
         this.alunosDeDoutorado = alunosDeDoutorado;
     }
 
+    /**
+     * @return Numero de alunos de mestrado
+     */
     protected int getAlunosDeMestrado() {
         return this.alunosDeMestrado;
     }
 
+    /**
+     * @return Numero de alunos de doutorado
+     */
     protected int getAlunosDeDoutorado() {
         return this.alunosDeDoutorado;
     }
