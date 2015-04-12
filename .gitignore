@@ -35,3 +35,6 @@ tp1_pm/build/classes/tp1_pm/VeiculosDePublicacao/VeiculoDePublicacao.class
 tp1_pm/nbproject/build-impl.xml
 
 *.class
+src/fatorImpacto_veiculo.txt
+src/pontuacao_artigo.txt
+src/popularidade_pesquisador.txt
