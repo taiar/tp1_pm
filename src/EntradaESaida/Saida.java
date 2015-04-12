@@ -10,12 +10,20 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 /**
  * Regula a logica da escrita de arquivos e apresentacao dos dados desejados do programa
  */
 public class Saida {
+
+    private DecimalFormat formato;
+
+    public Saida() {
+        this.formato = new DecimalFormat("#0.0000"); // Formato utilizado para os numeros da saida
+    }
+
     /**
      * Metodo responsavel por salvar num arquivo a popularidade dos pesquisadores
      * @param pesquisadores Estrutura contendo listagem dos pesquisadores
@@ -24,18 +32,10 @@ public class Saida {
         Path arquivo = Paths.get("./popularidade_pesquisador.txt");
         try (BufferedWriter writer = Files.newBufferedWriter(arquivo, Charset.defaultCharset())){
             for(Pesquisador p: pesquisadores){
-                String linha =
-                        p.getTipo() + ";" +
-                        String.valueOf(p.getId()) + ";" +
-                                String.valueOf(p.popularidade()) + ";" +
-                                String.valueOf(p.getPeso())  + ";" +
-                                String.valueOf(p.getNumeroArtigos())  + ";" +
-                                String.valueOf(p.getCitacoes())  + ";(" +
-                                p.getAutorias() + ")";
-
+                String linha = String.valueOf(p.getId()) + ";" + String.valueOf(this.formato.format(p.popularidade()));
                 writer.write(linha);
                 writer.newLine();
-                System.out.println(linha);
+// FIXME                System.out.println(linha);
             }
         }
         catch (IOException e) {}
@@ -49,10 +49,10 @@ public class Saida {
         Path arquivo = Paths.get("./fatorImpacto_veiculo.txt");
         try (BufferedWriter writer = Files.newBufferedWriter(arquivo, Charset.defaultCharset())){
             for(VeiculoDePublicacao v: veiculos){
-                String linha = v.getId() + ";" + String.valueOf(v.fatorDeImpacto());
+                String linha = v.getId() + ";" + String.valueOf(this.formato.format(v.fatorDeImpacto()));
                 writer.write(linha);
                 writer.newLine();
-                System.out.println(linha);
+// FIXME               System.out.println(linha);
             }
         }
         catch (IOException e) {}
@@ -66,10 +66,10 @@ public class Saida {
         Path arquivo = Paths.get("./pontuacao_artigo.txt");
         try (BufferedWriter writer = Files.newBufferedWriter(arquivo, Charset.defaultCharset())){
             for(Artigo a: artigos){
-                String linha = a.getId() + ";" + String.valueOf(a.qualidade());
+                String linha = a.getId() + ";" + String.valueOf(this.formato.format(a.qualidade()));
                 writer.write(linha);
                 writer.newLine();
-                System.out.println(linha);
+//  FIXME              System.out.println(linha);
             }
         }
         catch (IOException e) {}

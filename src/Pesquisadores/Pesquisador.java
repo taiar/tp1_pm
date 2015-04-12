@@ -71,7 +71,7 @@ public abstract class Pesquisador {
         double pesoTotal = 0;
 
         ArrayList<Integer> chaves = autoria.keys();
-        System.out.println("Autorias " + chaves + " para id " + this.getId());
+// FIXME        System.out.println("Autorias " + chaves + " para id " + this.getId());
 
         int quantidadeAutorias;
 
@@ -81,7 +81,7 @@ public abstract class Pesquisador {
             try {
                 quantidadeAutorias = this.autoria.get(ordemAutoria);
                 pesoTotal += quantidadeAutorias / (double) ordemAutoria;
-                System.out.println("Id " + this.getId() + ": " + quantidadeAutorias + " autorias para ordem " + ordemAutoria);
+// FIXME               System.out.println("Id " + this.getId() + ": " + quantidadeAutorias + " autorias para ordem " + ordemAutoria);
             } catch (ExcecaoChaveInexistente e) {
                 System.out.println("Chave inexistente no calculo de peso para chave: " + ordemAutoria);
             }
