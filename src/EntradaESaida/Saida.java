@@ -1,6 +1,7 @@
 package EntradaESaida;
 
 import Pesquisadores.Pesquisador;
+import VeiculosDePublicacao.Artigo;
 import VeiculosDePublicacao.VeiculoDePublicacao;
 
 import java.io.BufferedWriter;
@@ -57,4 +58,20 @@ public class Saida {
         catch (IOException e) {}
     }
 
+    /**
+     * Metodo responsavel por salvar num arquivo a pontuacao (qualidade) dos artigos
+     * @param artigos Estrutura contendo a listagem dos artigos
+     */
+    public void pontuacaoArtigo(ArrayList<Artigo> artigos) {
+        Path arquivo = Paths.get("./pontuacao_artigo.txt");
+        try (BufferedWriter writer = Files.newBufferedWriter(arquivo, Charset.defaultCharset())){
+            for(Artigo a: artigos){
+                String linha = a.getId() + ";" + String.valueOf(a.qualidade());
+                writer.write(linha);
+                writer.newLine();
+                System.out.println(linha);
+            }
+        }
+        catch (IOException e) {}
+    }
 }
