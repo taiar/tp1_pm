@@ -11,7 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Regula a logica da escrita de arquivos e apresentacao dos dados desejados do programa
@@ -21,7 +23,9 @@ public class Saida {
     private DecimalFormat formato;
 
     public Saida() {
-        this.formato = new DecimalFormat("#0.0000"); // Formato utilizado para os numeros da saida
+        DecimalFormatSymbols simbolos = new DecimalFormatSymbols();
+        simbolos.setDecimalSeparator('.');
+        this.formato = new DecimalFormat("#0.0000", simbolos); // Formato utilizado para os numeros da saida
     }
 
     /**
