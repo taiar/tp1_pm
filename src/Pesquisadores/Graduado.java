@@ -1,7 +1,7 @@
 package Pesquisadores;
 
 /**
- * Classe que representa um graduado, nivel mais alto concreto de sua hierarquia
+ * Classe que representa um graduado, nivel concreto mais alto de sua hierarquia
  */
 public class Graduado extends Pesquisador{
 

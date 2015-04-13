@@ -1,7 +1,9 @@
 package VeiculosDePublicacao;
 
-import Pesquisadores.Pesquisador;
-
+/**
+ * Classe que representa um artigo, item que relaciona pesquisadores por autoria e
+ * esta presente em revistas e conferencias
+ */
 public class Artigo {
     // identificador unico do artigo
     private int id;
