@@ -104,10 +104,6 @@ public abstract class Pesquisador {
      * @return popularidade do pesquisador
      */
     public double popularidade() {
-        double a = this.peso();
-        double b = this.getNumeroArtigos();
-        double c = this.getNumeroCitacoes();
-        System.out.println("Popularidade base: peso " + a + ", numero artigos " + b + ", citacoes " + c);
         return this.peso() + this.getNumeroArtigos() + this.getNumeroCitacoes();
     }
 

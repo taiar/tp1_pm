@@ -3,46 +3,54 @@ package VeiculosDePublicacao;
 import Pesquisadores.Pesquisador;
 
 public class Artigo {
-    
+    // identificador unico do artigo
     private int id;
 
+    // numero de vezes em que foi citado por outros artigos
     private int quantidadeDeCitacoes;
 
+    // Veiculo de publicacao no qual o artigo foi publicado
     private VeiculoDePublicacao veiculo;
-    private Pesquisador pesquisador;
 
     public Artigo(int id) {
       this.id = id;
     }
 
+    /**
+     * @return identificador unico do artigo
+     */
     public int getId() {
         return this.id;
     }
 
-    public void addQuantidadeDeCitacoes(){
+    public void increaseQuantidadeDeCitacoes(){
         this.quantidadeDeCitacoes += 1;
     }
 
+    /**
+     * @return quantidade de vezes em que um artigo foi citado
+     */
     public int getQuantidadeDeCitacoes() {
         return this.quantidadeDeCitacoes;
     }
 
+    /**
+     * @return veiculo de publicacao respectivo do artigo
+     */
     public VeiculoDePublicacao getVeiculoDePublicacao() {
       return this.veiculo;
     }
 
+    /**
+     * @param v veiculo de publicacao respectivo do artigo
+     */
     public void setVeiculoDePublicacao(VeiculoDePublicacao v) {
       this.veiculo = v;
     }
 
-    public Pesquisador getPesquisador() {
-        return pesquisador;
-    }
-
-    public void setPesquisador(Pesquisador pesquisador) {
-        this.pesquisador = pesquisador;
-    }
-
+    /**
+     * @return qualidade do artigo
+     */
     public float qualidade() {
       return this.veiculo.fatorDeImpacto() * this.quantidadeDeCitacoes;
     }

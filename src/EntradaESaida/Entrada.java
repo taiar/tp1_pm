@@ -205,7 +205,6 @@ public class Entrada {
 
         }
 
-
         // Lendo relações entre artigos e veiculos
         try{
             indiceEntrada = mapeamentoEntrada.get("artigos_veiculos");
@@ -253,7 +252,8 @@ public class Entrada {
             while(fs.hasNextLine()) {
                 String[] parametros = fs.nextLine().split(";");
                 int idArtigoCitado = Integer.parseInt(parametros[0]);
-                armazenamento.get(idArtigoCitado).addQuantidadeDeCitacoes();
+
+                armazenamento.get(idArtigoCitado).increaseQuantidadeDeCitacoes();
             }
         }
         catch (FileNotFoundException e) {
