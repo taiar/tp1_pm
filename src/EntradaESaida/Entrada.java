@@ -167,6 +167,8 @@ public class Entrada {
                                   ArrayList<VeiculoDePublicacao> veiculos) {
         // Lendo relações entre artigos e pesquisadores
         int indiceEntrada = 0;
+        ArrayList<Integer> grafoArtigos = new ArrayList<>();
+        ArrayList<Integer> grafoPesquisadores = new ArrayList<>();
 
         try{
             indiceEntrada = mapeamentoEntrada.get("grafo_artigos_pesquisadores");
@@ -192,17 +194,15 @@ public class Entrada {
             int id = Integer.parseInt(parametros[0]);
             int idPesquisador = Integer.parseInt(parametros[1]);
             int ordemAutoria = Integer.parseInt(parametros[2]);
+
             // Cria novo artigo
             Artigo a = new Artigo(id);
             armazenamento.put(id, a);
+
             // Adiciona informação sobre autoria ao perfil do pesquisador
             pesquisadores.get(idPesquisador - 1).addArtigo(ordemAutoria);
-            try{
-                pesquisadores.get(idPesquisador - 1).adicionaArtigo(armazenamento.get(id));
-            }catch(ExcecaoChaveInexistente e){
-                System.out.println("Id pesquisador inexistente: " + id);
-            }
-
+            grafoArtigos.add(id);
+            grafoPesquisadores.add(idPesquisador);
         }
 
         // Lendo relações entre artigos e veiculos
@@ -263,6 +263,12 @@ public class Entrada {
         catch(ExcecaoChaveInexistente e){}
 
         artigos.addAll(armazenamento.values());
+
+        // Adicionando referências aos artigos associados aos Pesquisadores
+        for (int i = 0; i < grafoArtigos.size(); i++) {
+            pesquisadores.get(grafoPesquisadores.get(i) - 1)
+                .adicionaArtigo(artigos.get(grafoArtigos.get(i) - 1));
+        }
         return true;
     }
 
