@@ -1,5 +1,6 @@
 package Pesquisadores;
 
+import Utilitarios.ItemDicionario;
 import VeiculosDePublicacao.Artigo;
 
 import java.util.ArrayList;
@@ -49,7 +50,15 @@ public abstract class Pesquisador {
      * @return Numero de artigos do pesquisador
      */
     public int getNumeroArtigos(){
-        return this.autoria.size();
+        int numeroArtigos = 0;
+
+        ArrayList<Integer> autorias = autoria.values();
+
+        for(Integer autoria : autorias){
+            numeroArtigos += autoria;
+        }
+
+        return numeroArtigos;
     }
 
     /**
@@ -95,6 +104,10 @@ public abstract class Pesquisador {
      * @return popularidade do pesquisador
      */
     public double popularidade() {
+        double a = this.peso();
+        double b = this.getNumeroArtigos();
+        double c = this.getNumeroCitacoes();
+        System.out.println("Popularidade base: peso " + a + ", numero artigos " + b + ", citacoes " + c);
         return this.peso() + this.getNumeroArtigos() + this.getNumeroCitacoes();
     }
 
